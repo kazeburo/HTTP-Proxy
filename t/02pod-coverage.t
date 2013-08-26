@@ -8,9 +8,7 @@ my $params = {
 };
 
 require Config;
-my $enable_thraeds = $Config::Config{useithreads};
-my @modules = grep { $enable_thraeds || $_ ne 'HTTP::Proxy::Engine::Threaded' } all_modules();
-
+my @modules =  grep { $Config::Config{useithreads} || $_ ne 'HTTP::Proxy::Engine::Threaded' } all_modules();
 plan tests => scalar @modules;
 pod_coverage_ok($_, $params) for @modules;
 
